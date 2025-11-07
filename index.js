@@ -144,8 +144,8 @@ const getAndPrintGitHubUserProfile = async (username) => {
         const usuario = await connectGitHub(url);
         const cardHTML = `
             <section>
-                <img src="${usuario.avatar_url}" alt="imagen de usuario">
-                <h1>${usuario.login}</h1>
+                <img src="${usuario.avatar_url}" alt="${usuario.name}">
+                <h1>${usuario.name}</h1>
                 <p>Public repos: ${usuario.public_repos}</p>
             </section>`;
         return cardHTML;
@@ -160,19 +160,17 @@ const crearElementoDom = async (username) => {
 
 
 /* ====================================================== fetchGithubUsers(userNames) ====================================================== */
-const fetchGithubUsers = (userNames) => {
+const fetchGithubUsers = async (userNames) => {
     try {
-        listaPromesas = [];
-        userNames.forEach(element => {
-            url = `https://api.github.com/users/${element}`;
-            const usuario = connectGitHub(url).then();
-            listaPromesas.push(usuario)
+        const listaPromesas = userNames.map((name) => {
+            url = `https://api.github.com/users/${name}`;
+            return connectGitHub(url); // devuelve una promesa
         });
-        Promise.all(listaPromesas).then((responses) => {
-        responses.forEach((response) => {
-            console.log(response.name, response.user_url);
+        const responses = await Promise.all(listaPromesas);
+        responses.forEach((user) => {
+        console.log(user.name, user.html_url);
         });
-        });
+        return responses;
     } catch (error) {
         throw console.log("ERROR");
     }
