@@ -1,5 +1,10 @@
 //RESUELVE TUS EJERCICIOS AQUI
 var url = "";
+/**
+ * Función para conectar con una api mediante su URL.
+ * @async  
+ * @returns {Promise<data>}
+ */
 const connect = async (url) => {
   try {
     const resp = await fetch(url,{});
@@ -18,6 +23,11 @@ const connect = async (url) => {
 };
 
 /* ====================================================== getAllBreeds ====================================================== */
+/**
+ * Función para obtener un array de strings con todas las razas de perro
+ * @async  
+ * @returns {Promise<Array<Object>>}
+ */
 const getAllBreeds = async() =>{
     try {
         url = "https://dog.ceo/api/breeds/list/all"
@@ -34,6 +44,11 @@ const getAllBreeds = async() =>{
 getAllBreeds();
 
 /* ====================================================== getRandomDog ====================================================== */
+/**
+ * Función para obtener una imagen perro aleatorio.
+ * @async  
+ * @returns {Promise<string>}
+ */
 const getRandomDog = async() =>{
     try {
         url = "https://dog.ceo/api/breeds/image/random";
@@ -49,6 +64,11 @@ getRandomDog();
 
 
 /* ====================================================== getAllImagesByBreed ====================================================== */
+/**
+ * Función para obtener todas las imagenes de la raza komondor.
+ * @async  
+ * @returns {Promise<Array<Object>>}
+ */
 const getAllImagesByBreed = async() =>{
     try {
         url = "https://dog.ceo/api/breed/komondor/images";
@@ -63,6 +83,12 @@ getAllImagesByBreed();
 
 
 /* ====================================================== getAllImagesByBreed2(breed) ====================================================== */
+/**
+ * Función para obtener todas las imagenes de una raza. 
+ * @async  
+ * @param {Object} perro 
+ * @returns {Promise<string>}
+ */
 const getAllImagesByBreed2 = async(perro) =>{
     try {
         url = `https://dog.ceo/api/breed/${perro}/images`;
@@ -78,7 +104,13 @@ getAllImagesByBreed2("komondor");
 /*======================================================================================================================
                                                     GITHUB API
   ======================================================================================================================*/
-const connectGitHub = async (url) => {
+/**
+ * Función para conectar con una api mediante su URL.
+ * @async  
+ * @param {string} url 
+ * @returns {Promise<*>}
+ */
+  const connectGitHub = async (url) => {
   try {
     const resp = await fetch(url,{});
     //console.log(resp);
@@ -96,6 +128,12 @@ const connectGitHub = async (url) => {
 };
 
 /* ====================================================== getGitHubUserProfile(username) ====================================================== */
+/**
+ * Función para obtener el perfil de un usuario.
+ * @async  
+ * @param {*} username 
+ * @returns {Promise<Object>}
+ */
 const getGitHubUserProfile = async (username) => {
     try {
         url = `https://api.github.com/users/${username}`;
@@ -110,6 +148,11 @@ const getGitHubUserProfile = async (username) => {
 
 
 /* ====================================================== printGithubUserProfile(username) ====================================================== */
+/**
+ * funcion que devuelve una promesa con datos de usuario
+ * @param {Object} username 
+ * @returns {Promise<Object>}
+ */
 const printGithubUserProfile = async (username) => {
     try {
         url = `https://api.github.com/users/${username}`;
@@ -128,6 +171,10 @@ const printGithubUserProfile = async (username) => {
 }
 
 const body = document.querySelector("body")
+/**
+ * Funcion para pintar en el DOM un usuario.
+ * @param {usuario} usuario 
+ */
 const pintarEnDom = (usuario) => {
     const cardHTML = `
         <section>
@@ -138,6 +185,12 @@ const pintarEnDom = (usuario) => {
 }
 
 /* ====================================================== getAndPrintGitHubUserProfile(username) ====================================================== */
+/**
+ * Función para obtener y printear el perfil de un usuario.
+ * @async  
+ * @param {*} username 
+ * @returns {Promise<string>} 
+ */
 const getAndPrintGitHubUserProfile = async (username) => {
     try {
         url = `https://api.github.com/users/${username}`;
@@ -160,6 +213,12 @@ const crearElementoDom = async (username) => {
 
 
 /* ====================================================== fetchGithubUsers(userNames) ====================================================== */
+/**
+ * Función para obtener la imagen de un pokemon random.
+ * @async  
+ * @param {*} userNames 
+ * @returns {Promise<listaPromesas>} 
+ */
 const fetchGithubUsers = async (userNames) => {
     try {
         const listaPromesas = userNames.map((name) => {
